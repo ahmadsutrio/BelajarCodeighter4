@@ -11,4 +11,7 @@ class Home extends BaseController
     public function home($id){
         return view('home', ['id' => $id]);
     }
+    public function rekap(){
+        return view('rekapitulasi_spp');
+    }
 }
