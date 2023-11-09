@@ -10,6 +10,7 @@
         <li class="">Day 1 - Membuat login page</li>
         <li class="">Day 2 - Membuat halaman buku penghubung</li>
         <li class="">Day 3 - Menambahkan database menggunakan migration, dan menambahkan data menggunakan ajax</li>
+        <li class="">Day 4 - Menambahkan fitur edit</li>
     </ul>
 </body>
 </html>
