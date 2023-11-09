@@ -2,51 +2,42 @@
 
 namespace App\Controllers;
 
+use app\Config\Routes;
 use Tests\Support\Models\BukuPenghubung;
+use App\Controllers\BaseController;
 
 class WaliController extends BaseController
 {
+    protected $bukuPenghubungModel;
+    public function __construct()
+    {
+        $this->bukuPenghubungModel = new BukuPenghubung();
+        
+    }
+
     public function index(): string
     {
-        $bukuPenghubung = new BukuPenghubung();
-        $data = $bukuPenghubung->findAll();
+        $data = [
+            'title'=>'Halaman Wali',
+            'data'=> $this->bukuPenghubungModel->findAll()
+        ];
         return view('table', ['data'=>$data]);
     }
 
     public function addBukuHubung()
     {
-        // Ambil data dari permintaan AJAX
-        $nama_siswa = $this->request->getPost('nama_siswa');
-        $pesan_guru = $this->request->getPost('pesan_guru');
-        $ttd_guru = $this->request->getPost('ttd_guru');
-        $pesan_orang_tua = $this->request->getPost('pesan_orang_tua');
-        $ttd_orang_tua = $this->request->getPost('ttd_orang_tua');
-        $date = $this->request->getPost('date');
+        
+        $bukuPenghubungModel = $this->bukuPenghubungModel;
 
-        // Buat array data untuk dimasukkan ke dalam tabel buku_penghubung
-        $data = [
-            'nama_siswa' => $nama_siswa,
-            'pesan_guru' => $pesan_guru,
-            'ttd_guru' => $ttd_guru,
-            'pesan_orang_tua' => $pesan_orang_tua,
-            'ttd_orang_tua' => $ttd_orang_tua,
-            'date' => $date
-        ];
-
-        // Load model yang sesuai, gantilah 'ModelName' dengan nama model yang sesuai
-        $bukuPenghubungModel = new BukuPenghubung();
-
-        // Simpan data ke dalam tabel buku_penghubung
-        $bukuPenghubungModel->insert($data);
-
-        // Kirim respons ke klien jika diperlukan
-        // Misalnya, Anda bisa mengirim respons JSON untuk memberi tahu klien bahwa penyimpanan berhasil
-        $response = [
-            'status' => 'success',
-            'message' => 'Data berhasil disimpan'
-        ];
-
-        return $this->response->setJSON($response);
+        $bukuPenghubungModel->save([
+            'nama_siswa' => $this->request->getPost('nama_siswa'),
+            'ttd_guru' => $this->request->getPost('ttd_guru'),
+            'pesan_orang_tua' => $this->request->getPost('pesan_orang_tua'),
+            'ttd_orang_tua' => $this->request->getPost('ttd_orang_tua'),
+            'date' => $this->request->getPost('date'),
+        ]);
+             return redirect()->to('http://localhost:8081/wali');
+        
     }
 
 

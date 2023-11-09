@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ELFAMOUS</title>
+    <title><?= isset($data['title']) ? $data['title'] : 'ELFAMOUS';?></title>
     <link rel="icon" type="image/x-icon" href="https://flashsoftindonesia.com/web/politik/assets/img/logo2.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">

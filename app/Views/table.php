@@ -9,9 +9,14 @@
                     <h2 class="text-uppercase">Buku penghubung orang tua siswa sd negeri balonggandu iv</h2>
                     <h4 class="text-uppercase">tahun pelajaran 2013/2014</h4>
                 </div>
-
             </div>
         </div>
+
+        <?php if (isset($message)) : ?>
+            <div class="alert alert-primary" role="alert">
+                A simple primary alert—check it out!
+            </div>
+        <?php endif; ?>
         <div class="col-9">
             <div class="row h-100">
                 <div class="col-12 d-flex justify-content-end">
@@ -42,7 +47,7 @@
                 </thead>
                 <tbody>
                     <?php $no = 1 ?>
-                    <?php foreach ($data as $item) : ?>
+                    <?php foreach ($data['data'] as $item) : ?>
                         <tr>
                             <td scope="col" class="align-middle"><?= $no++ ?></td>
                             <td scope="col"><?= $item->tanggal ?></td>
@@ -70,7 +75,7 @@
                                             </g>
                                         </svg>
                                     </button>
-                                    <button class="btn bg-success">
+                                    <button class="btn bg-success" data-toggle="modal" data-target="#update-<?= $item->id ?>">
                                         <svg viewBox="0 0 24 24" fill="none" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -82,6 +87,61 @@
                                 </div>
                             </td>
                         </tr>
+
+                        <div class="modal fade" id="update-<?= $item->id ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Edit Data</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="/add" method="post">
+                                        <div class="modal-body">
+
+
+                                            <div class="form-group mb-4">
+                                                <label for="nama_siswa" class="fw-bold fs-6">Nama Siswa</label>
+                                                <input type="text" name="nama_siswa" id="nama_siswa" class="form-control" value="<?= $item->nama_siswa ?>">
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="pesan_guru" class="fw-bold fs-6">Pesan guru</label>
+                                                <textarea name="pesan_guru" id="pesan_guru" rows="3" class="form-control w-100"><?= $item->pesan_guru ?></textarea>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="ttd_guru" class="mb-3 fw-bold fs-6">Tanda tangan guru</label>
+                                                <div class="custom-file mb-3 border p-2">
+                                                    <input type="file" class="custom-file-input" id="ttd_guru" name="ttd_guru">
+                                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="pesan_orang_tua" class="fw-bold fs-6">Pesan Orang Tua</label>
+                                                <textarea name="pesan_orang_tua" id="pesan_orang_tua" rows="3" class="form-control w-100"><?= $item->pesan_orang_tua ?></textarea>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="ttd_orang_tua" class="mb-3 fw-bold fs-6">Tanda Tangan Orang Tua</label>
+                                                <div class="custom-file mb-3 border p-2">
+                                                    <input type="file" class="custom-file-input" id="ttd_orang_tua" name="ttd_orang_tua">
+                                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <label for="date" class="fw-bold fs-6">Hari/Tanggal/Tahun</label>
+                                                <input type="date" name="tangga" id="date" class="form-control" value="<?= $item->tanggal ?>">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" id="simpan">simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     <?php endforeach; ?>
 
                 </tbody>
@@ -100,8 +160,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="" method="post">
+            <form action="/add" method="post">
+                <div class="modal-body">
+
+
                     <div class="form-group mb-4">
                         <label for="nama_siswa" class="fw-bold fs-6">Nama Siswa</label>
                         <input type="text" name="nama_siswa" id="nama_siswa" class="form-control">
@@ -113,7 +175,7 @@
                     <div class="form-group mb-4">
                         <label for="ttd_guru" class="mb-3 fw-bold fs-6">Tanda tangan guru</label>
                         <div class="custom-file mb-3 border p-2">
-                            <input type="file" class="custom-file-input" id="ttd_guru" name="ttd_guru" required>
+                            <input type="file" class="custom-file-input" id="ttd_guru" name="ttd_guru">
                             <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                             <div class="invalid-feedback">Example invalid custom file feedback</div>
                         </div>
@@ -125,7 +187,7 @@
                     <div class="form-group mb-4">
                         <label for="ttd_orang_tua" class="mb-3 fw-bold fs-6">Tanda Tangan Orang Tua</label>
                         <div class="custom-file mb-3 border p-2">
-                            <input type="file" class="custom-file-input" id="ttd_orang_tua" name="ttd_orang_tua" required>
+                            <input type="file" class="custom-file-input" id="ttd_orang_tua" name="ttd_orang_tua">
                             <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                             <div class="invalid-feedback">Example invalid custom file feedback</div>
                         </div>
@@ -134,13 +196,14 @@
                         <label for="date" class="fw-bold fs-6">Hari/Tanggal/Tahun</label>
                         <input type="date" name="tangga" id="date" class="form-control">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="simpan">simpan</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="simpan">simpan</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 <?= $this->endSection() ?>
