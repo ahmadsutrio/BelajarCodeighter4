@@ -47,7 +47,7 @@
                 </thead>
                 <tbody>
                     <?php $no = 1 ?>
-                    <?php foreach ($data['data'] as $item) : ?>
+                    <?php foreach ($data as $item) : ?>
                         <tr>
                             <td scope="col" class="align-middle"><?= $no++ ?></td>
                             <td scope="col"><?= $item->tanggal ?></td>
@@ -62,7 +62,7 @@
                             <td scope="col" class="text-capitalize"><?= $item->ttd_orang_tua ?></td>
                             <td class=" ">
                                 <div class="d-flex justify-content-center ">
-                                    <button class="btn bg-danger me-2">
+                                    <button class="btn bg-danger me-2" data-toggle="modal" data-target="#delete-<?= $item->id ?>">
                                         <svg viewBox="0 0 24 24" fill="none" width="20" height="20" xmlns="http://www.w3.org/2000/svg" stroke="#fffffff">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -97,10 +97,10 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="/add" method="post">
+                                    <form action="/edit" method="post">
                                         <div class="modal-body">
 
-
+                                            <input type="hidden" name="id" value="<?= $item->id ?>">
                                             <div class="form-group mb-4">
                                                 <label for="nama_siswa" class="fw-bold fs-6">Nama Siswa</label>
                                                 <input type="text" name="nama_siswa" id="nama_siswa" class="form-control" value="<?= $item->nama_siswa ?>">
@@ -142,6 +142,31 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- hapus -->
+                        <div class="modal fade" id="delete-<?= $item->id ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Modal Hapus</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="/delete/<?= $item->id ?>" method="post">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="id" value="<?= $item->id ?>">
+                                            <h5 class="text-black-50">Apakah anda yakin akan menghapus data dengan nama <span class="text-danger"><?= $item->nama_siswa ?></span></h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-danger">Iya</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     <?php endforeach; ?>
 
                 </tbody>
@@ -162,7 +187,10 @@
             </div>
             <form action="/add" method="post">
                 <div class="modal-body">
-
+                    
+                    <?php if (session()->getFlashdata('error')) : ?>
+                        <div class=" alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+                    <?php endif; ?>
 
                     <div class="form-group mb-4">
                         <label for="nama_siswa" class="fw-bold fs-6">Nama Siswa</label>

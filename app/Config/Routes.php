@@ -19,4 +19,6 @@ $routes->get('/wali', 'WaliController::index', ['as' => 'wali']);
 
 $routes->get('/beranda/(:num)', [[Home::class, 'home'],'$1']);
 $routes->post('/add', [WaliController::class, 'addBukuHubung']);
+$routes->post('/edit', [WaliController::class, 'editBukuHubung']);
+$routes->post('/delete/(:num)', [[WaliController::class, 'deleteBukuHubung'],'$1']);
 

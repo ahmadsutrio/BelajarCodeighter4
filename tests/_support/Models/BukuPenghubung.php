@@ -31,7 +31,21 @@ class BukuPenghubung extends Model
     // protected $deletedField  = 'deleted_at';
 
     // Validation
-    // protected $validationRules      = [];
+    // protected $validationRules      = [
+    //     'nama_siswa' =>[
+    //         'rules'=> 'required|min_length[3]',
+    //         'errors'=>[
+    //             'required'=> '{field} Wajib di isi',
+    //             'min_length'=>'{field} Minimal 3 karakter'
+    //         ]
+    //         ],
+    //         'pesan_guru'=>[
+    //             'rules'=>'required',
+    //             'errors'=>[
+    //                 'required' => '{field} Wajib di isi'
+    //             ]
+    //         ]
+    // ];
     // protected $validationMessages   = [];
     // protected $skipValidation       = false;
     // protected $cleanValidationRules = true;
