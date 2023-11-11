@@ -3,6 +3,26 @@
 <?= $this->section('content') ?>
 <div class="container-fluid">
     <div class="row justify-content-center">
+
+        <!-- notifikasi berhasil -->
+        <?php if (session()->getFlashdata('success')) : ?>
+            <div class="col-10 ">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Berhasil!</strong> <?= session()->getFlashdata('success'); ?>.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php elseif (session()->getFlashdata('error')) : ?>
+            <div class="alert col-10 alert-danger alert-dismissible fade show" role="alert">
+                <strong>Gagal!</strong> <?= session()->getFlashdata('error'); ?>.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+        <!-- end notifikasi berhasil -->
         <div class="col-lg-12 text-center">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
@@ -28,7 +48,7 @@
         </div>
         <div class="col-lg-10 table-responsive border-0">
 
-            <table class="table table-bordered ">
+            <table class="table table-bordered " id="tabel-data">
                 <thead>
                     <tr class="text-center">
                         <th scope="col" rowspan="2" class="align-middle">No</th>
@@ -88,6 +108,8 @@
                             </td>
                         </tr>
 
+                        <!-- edit -->
+
                         <div class="modal fade" id="update-<?= $item->id ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -143,6 +165,8 @@
                             </div>
                         </div>
 
+                        <!-- end edit -->
+
                         <!-- hapus -->
                         <div class="modal fade" id="delete-<?= $item->id ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -166,6 +190,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- end hapus -->
 
                     <?php endforeach; ?>
 
@@ -175,6 +200,7 @@
     </div>
 </div>
 
+<!-- tambah data -->
 
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -187,7 +213,7 @@
             </div>
             <form action="/add" method="post">
                 <div class="modal-body">
-                    
+
                     <?php if (session()->getFlashdata('error')) : ?>
                         <div class=" alert alert-danger"><?= session()->getFlashdata('error') ?></div>
                     <?php endif; ?>
@@ -233,5 +259,6 @@
         </div>
     </div>
 </div>
+<!-- end tambah -->
 
 <?= $this->endSection() ?>

@@ -57,18 +57,20 @@ class WaliController extends BaseController
             'ttd_orang_tua' => $this->request->getPost('ttd_orang_tua'),
             'date' => $this->request->getPost('date'),
         ]);
+        session()->setFlashdata('success','Berhasil menambahkan data');
         return redirect()->to('http://localhost:8081/wali');
     }
-
+    
     public function deleteBukuHubung($id)
     {
         $bukuPenghubungModel = $this->bukuPenghubungModel;
         $data = $bukuPenghubungModel->find($id);
         $data = $bukuPenghubungModel->delete($data->id);
-
+        
+        session()->setFlashdata('success','Berhasil menghapus data');
         return redirect()->to('http://localhost:8081/wali');
     }
-
+    
     public function editBukuHubung()
     {
         $id = $this->request->getPost('id');
@@ -82,7 +84,8 @@ class WaliController extends BaseController
         ];
         $update = $bukuPenghubungModel->find($id);
         $update = $bukuPenghubungModel->update($id, $data);
-
+        
+        session()->setFlashdata('success','Berhasil memperbarui data');
         return redirect()->to('http://localhost:8081/wali');
     }
 }
