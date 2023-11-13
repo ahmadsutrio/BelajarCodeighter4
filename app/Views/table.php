@@ -82,7 +82,7 @@
                             <td scope="col" class="text-capitalize"><?= $item->ttd_orang_tua ?></td>
                             <td class=" ">
                                 <div class="d-flex justify-content-center ">
-                                    <button class="btn bg-danger me-2" data-toggle="modal" data-target="#delete-<?= $item->id ?>">
+                                    <button class="btn bg-danger mr-2" data-toggle="modal" data-target="#delete-<?= $item->id ?>">
                                         <svg viewBox="0 0 24 24" fill="none" width="20" height="20" xmlns="http://www.w3.org/2000/svg" stroke="#fffffff">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -248,7 +248,7 @@
                     </div>
                     <div class="form-group mb-4">
                         <label for="date" class="fw-bold fs-6">Hari/Tanggal/Tahun</label>
-                        <input type="date" name="tangga" id="date" class="form-control">
+                        <input type="date" name="tanggal" id="date" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">

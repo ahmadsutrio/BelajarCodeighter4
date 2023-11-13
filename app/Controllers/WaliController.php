@@ -49,13 +49,13 @@ class WaliController extends BaseController
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->to('http://localhost:8081/wali')->withInput();
         }
-
+    
         $bukuPenghubungModel->save([
             'nama_siswa' => $this->request->getPost('nama_siswa'),
             'ttd_guru' => $this->request->getPost('ttd_guru'),
             'pesan_orang_tua' => $this->request->getPost('pesan_orang_tua'),
             'ttd_orang_tua' => $this->request->getPost('ttd_orang_tua'),
-            'date' => $this->request->getPost('date'),
+            'tanggal' => $this->request->getPost('tanggal'),
         ]);
         session()->setFlashdata('success','Berhasil menambahkan data');
         return redirect()->to('http://localhost:8081/wali');
@@ -80,7 +80,7 @@ class WaliController extends BaseController
             'ttd_guru' => $this->request->getPost('ttd_guru'),
             'pesan_orang_tua' => $this->request->getPost('pesan_orang_tua'),
             'ttd_orang_tua' => $this->request->getPost('ttd_orang_tua'),
-            'date' => $this->request->getPost('date'),
+            'tanggal' => $this->request->getPost('tanggal'),
         ];
         $update = $bukuPenghubungModel->find($id);
         $update = $bukuPenghubungModel->update($id, $data);
