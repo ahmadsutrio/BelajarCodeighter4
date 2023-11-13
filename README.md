@@ -12,6 +12,8 @@
         <li class="">Day 3 - Menambahkan database menggunakan migration, dan menambahkan data menggunakan ajax</li>
         <li class="">Day 4 - Menambahkan fitur edit</li>
         <li class="">Day 5 - Memperbarui fitur edit, delete, validasi dan notifikasi gagal menambahkan data</li>
+        <li class="">Day 6 - Menambahkan data tables untuk pencarian</li>
+        <li class="">Day 7 - Memperbaiki bug</li>
     </ul>
 </body>
 </html>
