@@ -13,7 +13,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->setAutoRoute(true);
 $routes->get('/', 'LoginController::index');
 $routes->get('/beranda',[Home::class, 'index']);
-$routes->get('/rekapitulas',[Home::class, 'rekap']);
+$routes->get('/rekapitulasi',[Home::class, 'rekap']);
 $routes->get('/wali', 'WaliController::index', ['as' => 'wali']);
 
 
